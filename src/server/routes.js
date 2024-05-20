@@ -1,4 +1,5 @@
-const { predictCancerHandler } = require("./handlers")
+const { getAllData } = require("../services/dataService")
+const { predictCancerHandler, getPredictHistories } = require("./handlers")
 
 const routes = [
     {
@@ -12,6 +13,11 @@ const routes = [
                 maxBytes: 1000000,
             }
         }
+    },
+    {
+        path: '/predict/histories',
+        method: 'GET',
+        handler: getPredictHistories,
     }
 ]
 
