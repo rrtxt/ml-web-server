@@ -24,16 +24,10 @@ async function predictCancerClassification(model, image) {
         const confidenceScore = Math.max(...score) * 100
 
         const classes = ['Cancer', 'Non-cancer']
-        const classResult = tfjs.argMax(prediction, 1).dataSync()[0]
+        const classResult = confidenceScore > 50 ? 0 : 1
         const label = classes[classResult]
 
-        let suggestion
-
-        if (label == 'Cancer') {
-            suggestion = "Segera periksa ke dokter!"
-        }
-
-        return { confidenceScore, label, suggestion }
+        return { confidenceScore, label }
     } catch (error) {
         throw new InputError('Terjadi kesalaham dalam melakukan prediksi')
     }
